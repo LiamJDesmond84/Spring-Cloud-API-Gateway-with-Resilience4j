@@ -2,6 +2,7 @@ package com.liam.api.gateway.configs;
 
 import java.time.Duration;
 
+
 import org.springframework.cloud.circuitbreaker.resilience4j.ReactiveResilience4JCircuitBreakerFactory;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
 import org.springframework.cloud.client.circuitbreaker.Customizer;
@@ -22,9 +23,11 @@ public class GatewayConfig {
 		return routeLocatorBuilder.routes()
 				.route(p -> p
 						.path("/employees/**")
+						.filters(f -> f.circuitBreaker(c -> c.setName("circuitBreaker").setFallbackUri("/employeeFallback")))
 						.uri("lb://EMPLOYEE-SERVICE"))
 				.route(p -> p
 						.path("/companies/**")
+						.filters(f -> f.circuitBreaker(c -> c.setName("circuitBreaker").setFallbackUri("/companyFallback")))
 						.uri("lb://COMPANY-SERVICE"))
 				.route(p -> p
 						.path("/departments/**")
@@ -33,10 +36,10 @@ public class GatewayConfig {
 				.build();
 	}
 	
-	@Bean
 	public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
-		return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-				.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults()).timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(3)).build()).build());
+	    return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
+	            .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
+	            .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build()).build());
 	}
 
 }
