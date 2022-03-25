@@ -4,23 +4,23 @@ server:
 spring:
   application:
     name: API-GATEWAY
-  cloud:
-    gateway:
-      routes:
-        - id: EMPLOYEE-SERVICE
-          uri: lb://EMPLOYEE-SERVICE
-          predicates:
-            - Path=/employees/***
-              
-        - id: COMPANY-SERVICE
-          uri: lb://COMPANY-SERVICE
-          predicates:
-            - Path=/companies/**
-
-        - id: DEPARTMENT-SERVICE
-          uri: lb://DEPARTMENT-SERVICE
-          predicates:
-            - Path=/departments/**
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: EMPLOYEE-SERVICE
+#          uri: lb://EMPLOYEE-SERVICE
+#          predicates:
+#            - Path=/employees/***
+#              
+#        - id: COMPANY-SERVICE
+#          uri: lb://COMPANY-SERVICE
+#          predicates:
+#            - Path=/companies/**
+#
+#        - id: DEPARTMENT-SERVICE
+#          uri: lb://DEPARTMENT-SERVICE
+#          predicates:
+#            - Path=/departments/**
 
                 
 
