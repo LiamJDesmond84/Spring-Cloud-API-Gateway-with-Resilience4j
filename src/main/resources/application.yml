@@ -5,6 +5,10 @@ spring:
   application:
     name: API-GATEWAY
 #  cloud:
+#    config:
+#      enabled: true
+#      uri: http://localhost:8888
+#  cloud:
 #    gateway:
 #      routes:
 #        - id: EMPLOYEE-SERVICE
@@ -25,11 +29,11 @@ spring:
                 
 
     
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    hostname: localhost
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#  instance:
+#    hostname: localhost
